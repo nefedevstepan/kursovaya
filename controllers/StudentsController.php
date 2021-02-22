@@ -8,6 +8,7 @@ use app\models\StudentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * StudentsController implements the CRUD actions for Students model.
@@ -23,9 +24,20 @@ class StudentsController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create','update','delete'],
+                'rules' => [
+                    [
+                        'actions' => ['create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+           ],
         ];
     }
 
@@ -64,6 +76,9 @@ class StudentsController extends Controller
      */
     public function actionCreate()
     {
+        // if(Yii::$app->user->isGuest)
+        //     echo 'Pleas login or register for watch more kittens!';
+
         $model = new Students();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -84,6 +99,8 @@ class StudentsController extends Controller
      */
     public function actionUpdate($id)
     {
+        // if(Yii::$app->user->isGuest)
+        //     echo 'Pleas login or register for watch more kittens!';
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -104,9 +121,13 @@ class StudentsController extends Controller
      */
     public function actionDelete($id)
     {
+        
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+        
+
     }
 
     /**

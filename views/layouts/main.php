@@ -29,8 +29,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Студенты РТК',
-        'brandUrl' => '/students',
+        'brandLabel' => 'Производственная практика',
+        'brandUrl' => '/practice',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -38,14 +38,14 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'База', 'url' => ['/students']],
+            ['label' => 'База', 'url' => ['/practice'], 'visible' => !Yii::$app->user->isGuest],
             // ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Регистрация', 'url' => ['/user/register']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Вход', 'url' => ['/user/login']]
             ) : (
                 '<li>'
-                . Html::beginForm(['/logout'], 'post')
+                . Html::beginForm(['user/logout'], 'post')
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']

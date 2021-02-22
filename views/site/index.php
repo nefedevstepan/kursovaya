@@ -1,14 +1,14 @@
 <?php
 
 /* @var $this yii\web\View */
-
-$this->title = 'Студенты РТК';
+use yii\helpers\Html;
+$this->title = 'База производственной практики';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        Онлайн база студентов РТК
-        <img src="images/rtk.jpg">
+        <a href="<?= \yii\helpers\Url::to(['/practice'])?>"> <button class="btn btn-success">Студент</button></a>
+        <a href="<?= \yii\helpers\Url::to(['user/login'])?>"> <button class="btn btn-success">Работодатель</button></a>
     </div>
 
     <div class="body-content">
