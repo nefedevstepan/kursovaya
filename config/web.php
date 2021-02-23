@@ -17,10 +17,18 @@ $config = [
     ],
 ],
     'components' => [
+        'view' => [
+        'theme' => [
+            'pathMap' => [
+                '@dektrium/user/views' => '@app/views/user'
+            ],
+        ],
+    ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'jkskjd',
         ],
+
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
